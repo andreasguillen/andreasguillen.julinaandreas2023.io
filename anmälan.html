@@ -1,0 +1,126 @@
+<html>
+<head>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 60px;
+      margin-bottom: 0px;
+      background-color: #D2E5D6;
+    }
+
+    .header h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .header a {
+      font-size: 16px;
+      text-decoration: none;
+      color: blue;
+    }
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #D2E5D6;
+      padding: 60px;
+      width: auto;
+      border-radius: 10px;
+      margin-top: 0px;
+      width: 100%;
+    }
+
+    .form-container label {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid gray;
+    }
+
+    .form-container input[type="submit"] {
+      background-color: blue;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form-container input[type="submit"]:hover {
+      background-color: lightblue;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 0px;
+      padding: 100px;
+      background-color: #D2E5D6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Anmälan till bröllop</h2>
+      <a href="#">Anmälan till bröllop</a>
+    </div>
+    <div class="form-container">
+      <form action="form_handler.php" method="post">
+        <div>
+        <label for="name">Namn på anmälare:</label>
+        <input type="text" id="name" required>
+       </div>
+       <div>
+        <label>Antal gäster dag 1:</label>
+        <input type="number" id="attendeesDayOne" required>
+      </div>
+      <div>
+        <label for="attendeesDayOne">Name of persons attending:</label>
+        <input type="text" id="attendeesDayOneNames" required>
+      </div>
+      <div>
+        <label for="attendeesDayOneNames">Number of people attending day two:</label>
+        <input type="number" id="attendeesDayTwo" required>
+      </div>
+      <div>
+        <label for="attendeesDayTwo">Name of persons attending:</label>
+        <input type="text" id="attendeesDayTwoNames" required>
+      </div>
+        <button type="submit"> Skicka</button>
+      </form>
+        </div>
+      <script>
+      const form = document.getElementById("form");
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        localStorage.setItem("formData", JSON.stringify(data));
+        alert("Tack för din anmälan!");
+      });
+
+      const formData = JSON.parse(localStorage.getItem("formData"));
+      document.getElementById("name").textContent = formData.name;
+
+</script>
+    <div class="footer">
